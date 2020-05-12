@@ -1,6 +1,7 @@
 #include "apue.h"
 #include <errno.h>
 #include <sys/time.h>
+#include <sys/resource.h>
 
 #if defined(MACOS)
 #include <sys/syslimits.h>
@@ -50,6 +51,7 @@ main(int argc, char *argv[])
     }
     gettimeofday(&end, NULL);
     end.tv_sec += 10;  /* run for 10 seconds */
+    setpriority(PRIO_PROCESS, 0, 0);
     if ((pid = fork()) < 0)
     {
         err_sys("fork failed");

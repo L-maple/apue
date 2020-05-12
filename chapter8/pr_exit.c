@@ -1,5 +1,6 @@
-#include "apue.h"
+// #include "apue.h"
 #include <sys/wait.h>
+#include <stdio.h>
 
 void
 pr_exit(int status)

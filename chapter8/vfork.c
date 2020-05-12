@@ -5,7 +5,8 @@ int globvar = 6;
 int
 main(void)
 {
-    int var;
+    int var, count;
+    char buf[10];
     pid_t pid;
 
     var = 88;
@@ -16,11 +17,17 @@ main(void)
     {
         globvar++;
         var++;
-        _exit(0);
+        //close(1);
+        fclose(stdout);
+        exit(0);
+        //close(1);
     }
 
     /*parent continues here*/
-    printf("pid=%ld, glob=%d, var=%d\n", (long)getpid(), globvar, var);
+    count = printf("pid=%ld, glob=%d, var=%d\n", (long)getpid(), globvar, var);
+    sprintf(buf, "%d\n", count);
+    write(STDOUT_FILENO, buf, strlen(buf));
 
     exit(0);
 }
+
