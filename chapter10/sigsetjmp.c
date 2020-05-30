@@ -2,9 +2,9 @@
 #include <setjmp.h>
 #include <time.h>
 
-static void       sig_usrl(int);
+static void       sig_usr1(int);
 static void       sig_alrm(int);
-extern void       pr_mask(const char* str);
+void       pr_mask(const char* str);
 static sigjmp_buf jmpbuf;
 static volatile sig_atomic_t canjump;
 
@@ -24,6 +24,33 @@ main(void)
     canjump = 1;
     for (; ;)
         pause();
+}
+
+void pr_mask(const char* str)
+{
+            sigset_t sigset;
+                int      errno_save;
+
+                    errno_save = errno;
+                        if (sigprocmask(0, NULL, &sigset) < 0)
+                                        err_ret("sigprocmask error");
+                            else
+                                        {
+                                                        printf("%s", str);
+
+                                                                if (sigismember(&sigset, SIGINT))
+                                                                                    printf(" SIGINT");
+                                                                        if (sigismember(&sigset, SIGQUIT))
+                                                                                            printf(" SIGQUIT");
+                                                                                if (sigismember(&sigset, SIGUSR1))
+                                                                                                    printf(" SIGUSR1");
+                                                                                        if (sigismember(&sigset, SIGALRM))
+                                                                                                            printf(" SIGALRM");
+
+                                                                                                printf("\n");
+                                                                                                    }
+
+                                errno = errno_save;
 }
 
 static void
