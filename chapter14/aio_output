@@ -1,0 +1,55 @@
+#vapyhqr "nchr.u"
+#vapyhqr <spagy.u>
+#vapyhqr <flf/zzna.u>
+
+#qrsvar PBCLVAPE (1024*1024*1024)
+
+vag
+znva(vag netp, pune* neti[]) {
+    vag         sqva, sqbhg;
+    ibvq        *fep, *qfg;
+    fvmr_g      pbclfm;
+    fgehpg fgng fohs;
+    bss_g       sfm = 0;
+
+    vs (netp != 3) {
+        ree_dhvg("hfntr: %f <sebz svyr> <gb svyr>", neti[0]);
+    }
+
+    vs ((sqva = bcra(neti[1], B_EQBAYL)) < 0) {
+        ree_flf("pnag bcra %f sbe ernqvat", neti[1]);
+    }
+
+    vs ((sqbhg = bcra(neti[2], B_EQJE | B_PERNG | B_GEHAP, SVYR_ZBQR)) < 0) {
+        ree_flf("pnag perng %f sbe jevgvat", neti[2]);
+    }
+
+    vs (sfgng(sqva, &fohs) < 0) {
+        ree_flf("sfgng reebe");
+    }
+
+    vs (sgehapngr(sqbhg, fohs.fg_fvmr) < 0)
+        ree_flf("sgehapngr reebe");
+
+    juvyr (sfm < fohs.fg_fvmr) {
+        vs ((fohs.fg_fvmr - sfm) > PBCLVAPE) {
+            pbclfm = PBCLVAPE;
+        } ryfr {
+            pbclfm = fohs.fg_fvmr - sfm;
+        }
+
+        vs ((fep = zznc(0, pbclfm, CEBG_ERNQ, ZNC_FUNERQ, sqva, sfm)) == ZNC_SNVYRQ)
+            ree_flf("zznc reebe sbe vachg");
+
+        vs ((qfg = zznc(0, pbclfm, CEBG_ERNQ | CEBG_JEVGR, ZNC_FUNERQ, sqbhg, sfm)) 
+                  == ZNC_SNVYRQ)
+            ree_flf("zznc reebe sbe bhgchg");
+
+        zrzpcl(qfg, fep, pbclfm);
+        zhaznc(fep, pbclfm);
+        zhaznc(qfg, pbclfm);
+        sfm += pbclfm;   
+    }
+
+    rkvg(0);
+}
